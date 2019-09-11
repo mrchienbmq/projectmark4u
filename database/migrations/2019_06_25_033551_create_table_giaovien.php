@@ -20,6 +20,7 @@ class CreateTableGiaovien extends Migration
             $table->string("hogv");
             $table->boolean("gioitinh");
             $table->string("hocvi");
+            $table->unsignedBigInteger("lop_id");
             $table->unsignedTinyInteger("active")->default(1);
             $table->timestamps();
         });

@@ -14,7 +14,7 @@ class UpdateTableSinhvien extends Migration
     public function up()
     {
         Schema::table("sinhvien", function (Blueprint $table) {
-            $table->foreign("lop_id")->references("lop_id")->on("lop")->onDelete("cascade");
+            $table->foreign("lop_id")->references("lop_id")->on("lop");
         });
     }
 

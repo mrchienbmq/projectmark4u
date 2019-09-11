@@ -76,6 +76,19 @@
             </span>
                             @endif
                         </div>
+   {{--                     <div class="form-group">
+                            <select name="lophoc_id" class="form-control">
+                                <option value="">Chọn Chuyên Ngành lớp</option>
+                                @foreach($tenlop as $lop)
+                                    <option @if(old("lophoc_id") == $lop->lophoc_id) selected @endif value="{{$lop->lophoc_id}}">{{$lop->title}}</option>
+                                @endforeach
+                            </select>
+                            @if($errors->has("title"))
+                                <span class="invalid-feedback" role="alert" style="color:red">
+                <strong>{{ $errors->first("title") }}</strong>
+            </span>
+                            @endif
+                        </div>--}}
                         <div class="form-group">
                             <select name="lop_id" class="form-control">
                                 <option value="">Chọn tên lớp</option>
@@ -86,6 +99,19 @@
                             @if($errors->has("tenlop"))
                                 <span class="invalid-feedback" role="alert" style="color:red">
                 <strong>{{ $errors->first("tenlop") }}</strong>
+            </span>
+                            @endif
+                        </div>
+                        <div class="form-group">
+                            <select name="giaovien_id" class="form-control">
+                                <option value="">Chọn Giáo Viên</option>
+                                @foreach($giaoviens as $gv)
+                                    <option @if(old("giaovien_id") == $gv->giaovien_id) selected @endif value="{{$gv->giaovien_id}}">{{$gv->tengv}}</option>
+                                @endforeach
+                            </select>
+                            @if($errors->has("tengv"))
+                                <span class="invalid-feedback" role="alert" style="color:red">
+                <strong>{{ $errors->first("tengv") }}</strong>
             </span>
                             @endif
                         </div>

@@ -32,7 +32,7 @@
                             <th>Email</th>
                             <th>Ngày Sinh</th>
                             <th>Lớp Học</th>
-                            <th>Chỉnh Sửa</th>
+                            <th>Lựa Chọn</th>
 
                         </tr>
                         </thead>
@@ -48,7 +48,7 @@
                             <th>Email</th>
                             <th>Ngày Sinh</th>
                             <th>Lớp Học</th>
-                            <th>Chỉnh Sửa</th>
+                            <th>Lựa Chọn</th>
                         </tr>
                         </tfoot>
                         <tbody>
@@ -70,7 +70,12 @@
                           <td>{{$sinhvien->email}}</td>
                           <td>{{$sinhvien->ngaysinh}}</td>
                           <td>{{$sinhvien->getlop_id->tenlop}}</td>
-                          <td><a class="btn btn-warning" href="{{url("sinhvien/edit?sinhvien_id=".$sinhvien->sinhvien_id)}}">Edit</a></td>
+                       {{--   @foreach($sinhvien->getlop_id as $sv)
+                          <td>{{$sv->tenlop}}</td>
+                          @endforeach--}}
+                          <td><a class="btn btn-primary" href="{{url("sinhvien/edit?sinhvien_id=".$sinhvien->sinhvien_id)}}">CHỈNH SỬA </a>
+                          <a class="btn btn-success" onclick="return confirm('Bạn Muốn Xóa Không? ');" href="{{url("sinhvien/delete/".$sinhvien->sinhvien_id)}}">XÓA </a>
+                          <a class="btn btn-info" href="{{url("sinhvien/detail/".$sinhvien->sinhvien_id)}}">Thông Tin</a></td>
                       </tr>
                             @endforeach
                         </tbody>

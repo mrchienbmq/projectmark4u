@@ -17,4 +17,7 @@ class DiemModel extends Model
         "diemki4",
         "sinhvien_id",
     ];
+   /* public function totalmark(){
+        return (($this->diemki1+$this->diemki2+$this->diemki3+$this->diemki4));
+    }*/
 }

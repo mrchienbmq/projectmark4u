@@ -12,28 +12,37 @@
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Thông Tin Giáo Viên</h6>
             </div>
+            @if(Session::has("message"))
+                <div class="alert alert-success" role="alert">
+                    {{Session::get("message")}}
+                </div>
+            @endif
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Mã Giáo Viên</th>
-                            <th>Tên </th>
-                            <th>Họ</th>
-                            <th>Gioi Tính</th>
-                            <th>Học vị</th>
+                            <th>MÃ GIÁO VIÊN</th>
+                            <th>TÊN </th>
+                            <th>HỌ</th>
+                            <th>GIỚI TÍNH</th>
+                            <th>ĐANG GIẢNG DẠY</th>
+                            <th>HỌC VẤN</th>
+                            <th>TÙY CHỌN</th>
 
                         </tr>
                         </thead>
                         <tfoot>
                         <tr>
                             <th>ID</th>
-                            <th>Mã Giáo Viên</th>
-                            <th>Tên </th>
-                            <th>Họ</th>
-                            <th>Gioi Tính</th>
-                            <th>Học vị</th>
+                            <th>MÃ GIÁO VIÊN</th>
+                            <th>TÊN </th>
+                            <th>HỌ</th>
+                            <th>GIỚI TÍNH</th>
+                            <th>ĐANG GIẢNG DẠY</th>
+                            <th>HỌC VẤN</th>
+                            <th>TÙY CHỌN</th>
 
                         </tr>
                         </tfoot>
@@ -51,6 +60,7 @@
                                         {!! 'Nữ' !!}
                                     @endif
                                 </td>
+                                <td>{{$giaovien->lop->tenlop}}</td>
                                 <td>
                                     @if  ($giaovien -> hocvi == 5 )
                                         {!! 'Cao Học' !!}
@@ -63,6 +73,10 @@
                                         @else
                                          {!! "Hợp Đồng" !!}
                                         @endif
+                                <td><a class="btn btn-primary" href="{{url("giaovien/edit?giaovien_id=".$giaovien->giaovien_id)}}">CHỈNH SỬA </a>
+                                    <a class="btn btn-success" onclick="return confirm('Bạn Muốn Xóa Không? ');" href="{{url("giaovien/delete/".$giaovien->giaovien_id)}}">XÓA </a>
+                                    <a class="btn btn-info" href="{{url("giaovien/detail/".$giaovien->giaovien_id)}}">Thông Tin</a></td>
+
                                 </td>
                             </tr>
                         @endforeach
@@ -70,6 +84,7 @@
                     </table>
                     {!!$giaoviens ->links()!!}
                 </div>
+                <a href="{{ url("giaovien/create") }}" class="btn btn-danger">Tạo giáo viên mới</a>
             </div>
         </div>
 

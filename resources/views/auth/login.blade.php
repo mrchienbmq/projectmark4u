@@ -41,7 +41,6 @@
                     </div>
                     {!! csrf_field() !!}
                     <button type="submit" class="btn btn-primary">LOGIN</button>
-                    <a href="{{route("register")}}" class="btn btn-primary">Register</a>
                     <hr>
                     <a href="#" class="btn btn-google btn-user btn-block">
                       <i class="fab fa-google fa-fw"></i> Login with Google

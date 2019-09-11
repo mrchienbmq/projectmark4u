@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\GiaoVienModel;
 use App\LopHocModel;
+use App\ShowLopModel;
 use App\SinhVienModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -18,14 +19,17 @@ class PagesController extends Controller
 
         $sinhviens = SinhVienModel::orderBy("sinhvien_id","asc")->paginate(5);
         return view("admin.table",compact("sinhviens"));
-
-
     }
+    /*student Controller*/
     public function SinhVienCreate(){
 
         $lophocs = LopHocModel::where("active",1)->orderBy("tenlop","asc")
             ->select(["lop_id","tenlop"])->get();
-        return view("admin.themsinhvien",compact("lophocs"));
+        $giaoviens = GiaoVienModel::where("active",1)->orderBy("tengv","asc")
+            ->select(["giaovien_id","tengv"])->get();
+        $tenlop = ShowLopModel::where("active",1)->orderBy("title","asc")
+            ->select(["lophoc_id","title"])->get();
+        return view("admin.themsinhvien",compact("lophocs","giaoviens","tenlop"));
     }
     public function SinhVienSave(Request $request){
         $this->validate($request,[
@@ -55,8 +59,9 @@ class PagesController extends Controller
             "diachi" => $request ->get("diachi"),
             "email" => $request->get("email"),
             "ngaysinh" => $request ->get("ngaysinh"),
-            "lop_id" => $request -> get("lop_id"),
-            "sinhvien_image" => $url
+            "sinhvien_image" => $url,
+            "lop_id" => $request ->get("lop_id"),
+            "giaovien_id" => $request ->get("giaovien_id"),
         ])->save();
         return redirect("table")->with("message","Thêm sinh viên thành công");
     }
@@ -68,11 +73,13 @@ class PagesController extends Controller
         if ($sinhvien) {
             $lops = LopHocModel::where("active", 1)->orderBy("tenlop", "asc")
                 ->select(["lop_id", "tenlop"])->get();
-            return view("admin.editsinhvien", compact("sinhvien","lops"));
+            $giaoviens = GiaoVienModel::where("active",1)->orderBy("tengv", "asc")
+                ->select(["giaovien_id","tengv"])->get();
+            return view("admin.editsinhvien", compact("sinhvien","lops","giaoviens"));
         }
         echo "sinh vien not foud";
     }
-    public function SinhVienUpdate(Request $request, $id){
+    public function SinhVienUpdate(Request $request){
         $this->validate($request,[
             "masv" =>  "required|min:2|max:100:sinhvien,ten,".$request->get("sinhvien_id").",sinhvien_id",
             "ten" => "required|min:2|max:100|",
@@ -81,7 +88,6 @@ class PagesController extends Controller
             "diachi" => "required|min:6|max:1000|",
             "email" => "required|min:6|max:100|",
             "ngaysinh" => "required|date|min:0",
-            "sinhvien_image" =>"required|file|min:0|max:10000"
         ]);
 /*        $data= Course::findOrFail($id);
         $data->update($request->all());
@@ -116,6 +122,7 @@ class PagesController extends Controller
                 "email" => $request ->get("email"),
                 "sinhvien_image" => $url,
                 "ngaysinh" =>$request ->get("ngaysinh"),
+                "giaovien_id" =>$request->get("giaovien_id"),
                 "lop_id" => $request ->get("lop_id"),
             ]);
             return redirect("table")->with("message","Chỉnh sửa sinh viên thành công");
@@ -123,6 +130,83 @@ class PagesController extends Controller
         return "sinh vien not foud";
     }
 
+    public function SinhVienDelete($sinhvien_id){
+        $sinhvien = SinhVienModel::find($sinhvien_id);
+        $sinhvien -> delete();
+        return redirect("table")->with("message","Delete student successfully");
+    }
+/*The end Student Controller*/
+
+    /*Teacher Controller*/
+    public function giaovien(){
+        $giaoviens  = GiaoVienModel::all();
+
+        $giaoviens = GiaoVienModel::orderBy("giaovien_id","asc")->paginate(5);
+        return view("admin.giaovien",compact("giaoviens"));
+    }
+
+    public function GiaoVienCreate(){
+        $lophocs = LopHocModel::where("active",1)->orderBy("tenlop","asc")
+            ->select(["lop_id","tenlop"])->get();
+        return view("admin.themgiaovien",compact("lophocs"));
+    }
+    public function GiaoVienSave(Request $request){
+        $this->validate($request,[
+           "magv" => "required|min:2|max:100|",
+           "tengv" => "required|min:2|max:100|",
+            "hogv" => "required|min:2|max:100|",
+            "gioitinh" => "required|min:0|max:100|",
+            "hocvi" => "required|min:0|max:100|",
+        ]);
+        GiaoVienModel::create([
+            "magv" => $request -> get("magv"),
+            "tengv" => $request -> get("tengv"),
+            "hogv" => $request -> get("hogv"),
+            "gioitinh" => $request -> get("gioitinh"),
+            "lop_id" => $request -> get("lop_id"),
+            "hocvi" => $request ->get("hocvi"),
+        ])->save();
+        return redirect("giaovien")->with("message","Thêm giáo viên mới thành công");
+    }
+
+    public function GiaoVienEdit(Request $request){
+        $id = $request->get("giaovien_id");
+        $giaovien = GiaoVienModel::find($id);
+        if ($giaovien){
+            $lops = LopHocModel::where("active",1)->orderBy("tenlop","asc")
+                ->select(["lop_id","tenlop",])->get();
+            return view("admin.editgiaovien",compact("giaovien","lops"));
+        }
+        echo "sinh vien not foud";
+    }
+
+    public function GiaoVienUpdate(Request $request){
+        $this->validate($request,[
+            "magv" =>  "required|min:2|max:100:giaovien,tengv,".$request->get("giaovien_id").",giaovien_id",
+            "tengv" => "required|min:2|max:100|",
+            "hogv" => "required|min:2|max:100|",
+            "gioitinh" => "required|min:0|max:100|",
+            "hocvi" => "required|min:0|max:100|",
+        ]);
+        $giaovien = GiaoVienModel::find($request->get("giaovien_id"));
+        if ($giaovien){
+            $giaovien->update([
+                "magv" => $request ->get("magv"),
+                "tengv" => $request ->get("tengv"),
+                "hogv" => $request ->get("hogv"),
+                "gioitinh" => $request ->get("gioitinh"),
+                "lop_id" => $request ->get("lop_id"),
+                "hocvi" => $request ->get("hocvi"),
+            ]);
+            return redirect("giaovien")->with("message","Chỉnh sửa giáo viên thành công");
+        }
+        return "giáo viên không có";
+    }
+    public function GiaoVienDelete($giaovien_id){
+        $giaovien = GiaoVienModel::find($giaovien_id);
+        $giaovien->delete();
+        return redirect("giaovien")->with("message","Delete Teacher Success");
+    }
 
     public function forgotps(){
         return view("auth.forgot-password");
@@ -130,10 +214,5 @@ class PagesController extends Controller
     public function erros404(){
         return view("admin.404");
     }
-    public function giaovien(){
-        $giaoviens  = GiaoVienModel::all();
 
-        $giaoviens = GiaoVienModel::orderBy("giaovien_id","asc")->paginate(5);
-        return view("admin.giaovien",compact("giaoviens"));
-    }
 }

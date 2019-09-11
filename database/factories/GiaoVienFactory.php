@@ -11,6 +11,7 @@ $factory->define(App\GiaoVienModel::class, function (Faker $faker) {
         "tengv" => $faker -> firstName,
         "hogv" => $faker ->lastName,
         "gioitinh" => $faker ->boolean,
-        "hocvi" => $faker ->numberBetween(1,5)
+        "hocvi" => $faker ->numberBetween(1,5),
+        "lop_id" => $faker ->randomFloat(0,1,10)
     ];
 });

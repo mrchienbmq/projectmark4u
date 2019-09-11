@@ -90,7 +90,21 @@
                     @endif
                 </div>
                 <div class="form-group">
-                    <input type="file" class="form-control"  name="sinhvien_image" placeholder="Anh sinh vien" required="required">
+                    <select name="giaovien_id" class="form-control">
+                        <option value="">Chọn tên giáo viên</option>
+                        @foreach($giaoviens as $gv)
+                            <option @if($sinhvien->giaovien_id == $gv->giaovien_id) selected @endif value="{{$gv->giaovien_id}}">{{$gv->tengv}}</option>
+                        @endforeach
+                    </select>
+                    @if($errors->has("giaovien_id"))
+                        <span class="invalid-feedback" role="alert" style="color:red">
+                <strong>{{ $errors->first("giaovien_id") }}</strong>
+            </span>
+                    @endif
+                </div>
+                <div class="form-group">
+                    <input type="file" class="form-control"  name="sinhvien_image" placeholder="Anh sinh vien" >
+                    <option value="{{$sinhvien->sinhvien_image}}"></option>
                     <img src="{{$sinhvien->sinhvien_image}}" width="100" height="100">
                     @if($errors->has("sinhvien_image"))
                         <span class="invalid-feedback" role="alert" style="color:red">

@@ -14,7 +14,7 @@ class UpdateTableLop extends Migration
     public function up()
     {
         Schema::table('lop', function (Blueprint $table) {
-            $table->foreign("khoa_id")->references("khoa_id")->on("khoa")->onDelete("cascade");
+            $table->foreign("khoa_id")->references("khoa_id")->on("khoa");
         });
     }
 

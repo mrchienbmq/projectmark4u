@@ -52,12 +52,12 @@
         <hr class="sidebar-divider">
 
         <!-- Heading -->
-        <div class="sidebar-heading">
+ {{--       <div class="sidebar-heading">
             Interface
-        </div>
+        </div>--}}
 
         <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item">
+{{--        <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                 <i class="fas fa-fw fa-cog"></i>
                 <span>Components</span>
@@ -69,10 +69,10 @@
                     <a class="collapse-item" href="cards.html">Cards</a>
                 </div>
             </div>
-        </li>
+        </li>--}}
 
         <!-- Nav Item - Utilities Collapse Menu -->
-        <li class="nav-item">
+       {{-- <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
                 <i class="fas fa-fw fa-wrench"></i>
                 <span>Utilities</span>
@@ -86,15 +86,15 @@
                     <a class="collapse-item" href="utilities-other.html">Other</a>
                 </div>
             </div>
-        </li>
+        </li>--}}
 
         <!-- Divider -->
-        <hr class="sidebar-divider">
+   {{--     <hr class="sidebar-divider">
 
         <!-- Heading -->
         <div class="sidebar-heading">
             Addons
-        </div>
+        </div>--}}
 
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
@@ -119,19 +119,34 @@
         <li class="nav-item">
             <a class="nav-link" href="{{route("charts")}}">
                 <i class="fas fa-fw fa-chart-area"></i>
-                <span>Charts</span></a>
+                <span>CHARTS</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{route("monhoc")}}">
+                <i class="fa fa-table" aria-hidden="true"></i>
+                <span>QUẢN LÍ MÔN HỌC</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{route("lophoc")}}">
+                <i class="fas fa-fw fa-address-book"></i>
+                <span>QUẢN LÍ LỚP HỌC</span></a>
         </li>
 
         <!-- Nav Item - Tables -->
         <li class="nav-item">
             <a class="nav-link" href="{{route("tables")}}">
-                <i class="fas fa-fw fa-table"></i>
+                <i class="fas fa-fw fa fa-graduation-cap"></i>
                 <span>QUẢN LÝ SINH VIÊN</span></a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{route("giaovien")}}">
                 <i class="fas fa-fw fa-table"></i>
                 <span>QUẢN LÝ GIÁO VIÊN</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{route("email")}}">
+                <i class="fas fa-fw fa-table"></i>
+                <span>QUẢN LÍ EMAIL ĐĂNG KÍ</span></a>
         </li>
 
         <!-- Divider -->
@@ -401,6 +416,7 @@
 <script src="{{asset("assets/js/datatable/js/jquery.dataTables.min.js")}}"></script>
 <script src="{{asset("assets/js/datatable/datatable.js")}}"></script>
 <script src="{{asset("assets/js/datatable/jquery-3.3.1.js")}}"></script>
+
 
 
 </body>

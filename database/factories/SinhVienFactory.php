@@ -14,7 +14,8 @@ $factory->define(App\SinhVienModel::class, function (Faker $faker) {
         "diachi" => $faker ->address,
         "email" => $faker -> email,
         "ngaysinh" => $faker ->date(),
-        "lop_id" =>$faker -> randomFloat(0,1,10)
+        "lop_id" =>$faker -> randomFloat(0,1,10),
+        /*"giaovien_id" =>$faker -> randomFloat(0,1,10),*/
 
     ];
 });
